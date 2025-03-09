@@ -7,7 +7,7 @@ import java.awt.Color
 
 fun main(args: Array<String>) {
 //    val name = args[0]
-    val extension = args[1]
+    val extension = "jpg"//args[1]
     val pineapple = "ascii-pineapple"
     val tree = "tree_small"
 //    val snow = "snow_small"
@@ -29,14 +29,17 @@ fun main(args: Array<String>) {
                 showIfHigherThan(it.colorsArray(col, row), 200, 200, 100)
             } }
     }
-
-//    readImage(name, extension)
-//        .also { it.asciiArray.saveToTextFile(name) }
-//        .also { it.lightnessArray.writeImage(name, extension) }
-//        .also { it.darknessArray.writeImage(name, extension) }
-//        .also { it.darknessArray.toAsciiArray().saveToImage(SERIF_BOLD, 9, name, extension, Color.BLACK) { _, _ -> Color.WHITE } }
-//        .also { it.darknessArray.toAsciiArray().saveToImage(SERIF_BOLD, 9, name, extension, Color.BLACK) { col, row -> it.colorsArray(col, row) } }
-//        .also { it.asciiArray.saveToImage(SERIF_BOLD, 9, name, extension, Color(50, 50, 50)) { col, row -> it.colorsArray(col, row) } }
+    names.forEach { name ->
+        readImage(name, extension)
+            .also { it.asciiArray.saveToTextFile(name) }
+            .also { it.lightnessArray.writeImage(name, extension) }
+            .also { it.darknessArray.writeImage(name, extension) }
+            .also { it.darknessArray.toAsciiArray().saveToImage(SERIF_BOLD, 9, name, extension, Color.BLACK) { _, _ -> Color.WHITE } }
+            .also {
+                it.darknessArray.toAsciiArray().saveToImage(SERIF_BOLD, 9, name, extension, Color.BLACK) { col, row -> it.colorsArray(col, row) }
+            }
+            .also { it.asciiArray.saveToImage(SERIF_BOLD, 9, name, extension, Color(50, 50, 50)) { col, row -> it.colorsArray(col, row) } }
+    }
 }
 
 
